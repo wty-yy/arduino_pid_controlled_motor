@@ -15,6 +15,7 @@ Arduino + L298N + 电机&编码器 = 速度闭环控制
 ## 使用方法
 ### 连线
 > 可以在`setup()`函数中修改引脚定义
+
 按照下图连接硬件，单个电机连接电路图:
 ![diagram](assets/Arduino_L298N_Encoder_motor.png)
 实际电路图:
@@ -50,6 +51,7 @@ s 100 100
 ### 双电机控制效果
 执行命令如下:
 ![cmd](assets/double_motor_pid_control_cmd.png)
+
 效果如下:
 
-
+https://github.com/user-attachments/assets/9477ec22-10fb-49e7-9185-63db84fb6377
