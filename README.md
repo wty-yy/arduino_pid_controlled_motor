@@ -15,6 +15,7 @@ Arduino + L298N + Motor & Encoder = Speed Closed-Loop Control
 ## Usage
 ### Wiring
 > You can modify pin definitions in `setup()` function
+
 Connect the hardware according to the following diagram, single motor connection diagram:
 ![diagram](assets/Arduino_L298N_Encoder_motor.png)
 Actual circuit diagram:
@@ -51,3 +52,5 @@ Estimation method: `r` to reset the encoder count, then `p 100 100` to record th
 Execute commands as follows:
 ![cmd](assets/double_motor_pid_control_cmd.png)
 Effect as follows:
+
+https://github.com/user-attachments/assets/9477ec22-10fb-49e7-9185-63db84fb6377
