@@ -7,16 +7,19 @@ struct motor_control {
   int encoder_pin[2];  // A port, B port
   int low_pin = 0;  // 0 or 1
   int pwm;  // 0~255
-  volatile int encoder_count = 0;  // A port pull up count
+  volatile int encoder_count = 0;  // A port pull up count for PID
+  volatile unsigned long echo_count = 0;  // A port pull up count for ECHO
   volatile unsigned long last_time = 0;  // last time the encoder was updated
   PID pid;
 } motor1, motor2;
 
 void encoder1ISR() {  // interrupt service routine for motor1
   ++motor1.encoder_count;
+  ++motor1.echo_count;
 }
 void encoder2ISR() {  // interrupt service routine for motor2
   ++motor2.encoder_count;
+  ++motor2.echo_count;
 }
 
 bool start_pid = false;
@@ -73,7 +76,7 @@ void setup() {
   Serial.print("PID_FREQUENCY:"); Serial.print(PID_FREQUENCY); Serial.println("Hz");
   Serial.println("Commands:");
   Serial.println("r: reset encoder count for motor1 and motor2");
-  Serial.println("e: print encoder count for motor1 and motor2");
+  Serial.println("e: echo encoder count for motor1 and motor2");
   Serial.println("p <pwm1> <pwm2>: set pwm for motor1 and motor2");
   Serial.println("s <rpm1> <rpm2>: set rpm for motor1 and motor2");
   Serial.println("-----------------------------------------------");
@@ -132,12 +135,14 @@ void run_cmd() {
     case 'r':  // reset encoder count
       close_pid();
       motor1.encoder_count = 0;
+      motor1.echo_count = 0;
       motor2.encoder_count = 0;
+      motor2.echo_count = 0;
       Serial.println("Reset OK");
       break;
     case 'e':  // encoder count
-      Serial.print(">motor1 PULL counter:"); Serial.println(motor1.encoder_count);
-      Serial.print(">motor2 PULL counter:"); Serial.println(motor2.encoder_count);
+      Serial.print(">motor1 PULL counter:"); Serial.println(motor1.echo_count);
+      Serial.print(">motor2 PULL counter:"); Serial.println(motor2.echo_count);
       break;
     case 'p':  // pwm
       close_pid();
