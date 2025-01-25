@@ -2,6 +2,7 @@
 #include "pid.h"
 #define ENCODE_RESOLUTION 442  // encoder pulses per motor one turn
 #define PID_FREQUENCY 30  // Hz
+// #define HUMAN_FRIEND
 
 struct motor_control {
   int input[2];  // in1, in2
@@ -72,6 +73,8 @@ void setup() {
   TIMSK1 |= (1 << OCIE1A);
   sei();//allow interrupts
 
+  // Use for human-friendly tips
+#ifdef HUMAN_FRIEND
   Serial.println("-----------------------------------------------");
   Serial.print("ENCODER_RESOLUTION:"); Serial.println(ENCODE_RESOLUTION);
   Serial.print("PID_FREQUENCY:"); Serial.print(PID_FREQUENCY); Serial.println("Hz");
@@ -81,6 +84,7 @@ void setup() {
   Serial.println("p <pwm1> <pwm2>: set pwm for motor1 and motor2");
   Serial.println("s <rpm1> <rpm2>: set rpm for motor1 and motor2");
   Serial.println("-----------------------------------------------");
+#endif
 }
 
 void set_pwm(motor_control& motor, int pwm) {
@@ -142,8 +146,12 @@ void run_cmd() {
       Serial.println("Reset OK");
       break;
     case 'e':  // encoder count
+    #ifdef HUMAN_FRIEND
       Serial.print(">motor1 PULL counter:"); Serial.println(motor1.echo_count);
       Serial.print(">motor2 PULL counter:"); Serial.println(motor2.echo_count);
+    #else
+      Serial.print(motor1.echo_count); Serial.print(" "); Serial.println(motor2.echo_count);
+    #endif
       break;
     case 'p':  // pwm
       close_pid();
