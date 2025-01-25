@@ -1,3 +1,4 @@
+// for 2wd - 2 wheel drive robot
 #include "pid.h"
 #define ENCODE_RESOLUTION 442  // encoder pulses per motor one turn
 #define PID_FREQUENCY 30  // Hz
