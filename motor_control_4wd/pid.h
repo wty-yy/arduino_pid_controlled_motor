@@ -3,7 +3,7 @@ struct PID {
   // double ki = 0.5;  // integral gain
   // double kd = 0.1;  // derivative gain
   // try PID constants from: https://github.com/linorobot/linorobot2_hardware/blob/galactic/config/lino_base_config.h#L37
-  double kp = 5.0;  // proportional gain
+  double kp = 0.6;  // proportional gain
   double ki = 0.8;  // integral gain
   double kd = 0.5;  // derivative gain
   double setpoint = 0;  // target speed in RPM
