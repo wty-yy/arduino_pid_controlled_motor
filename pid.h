@@ -1,6 +1,9 @@
 struct PID {
-  double kp = 1.0;  // proportional gain
-  double ki = 0.5;  // integral gain
+  // double kp = 10.0;  // proportional gain
+  // double ki = 0.0;  // integral gain
+  // double kd = 0.1;  // derivative gain
+  double kp = 5.0;  // proportional gain
+  double ki = 0.3;  // integral gain
   double kd = 0.1;  // derivative gain
   double setpoint = 0;  // target speed in RPM
   double error = 0;
