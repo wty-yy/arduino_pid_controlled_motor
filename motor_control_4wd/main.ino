@@ -216,7 +216,7 @@ void run_cmd() {
       set_rpm(motor2, arg2);
       set_rpm(motor3, arg3);
       set_rpm(motor4, arg4);
-      if (arg1 == 0 && arg2 == 0) close_pid();
+      if (arg1 == 0 && arg2 == 0 && arg3 == 0 && arg4 == 0) close_pid();
       Serial.print("Set RPM: ");
       Serial.print(arg1); Serial.print(" "); Serial.print(arg2); Serial.print(" ");
       Serial.print(arg3); Serial.print(" "); Serial.println(arg4);

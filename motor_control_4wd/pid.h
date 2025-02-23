@@ -23,7 +23,7 @@ struct PID {
       integral = 0;
       derivative = 0;
     }
-    output = kp * error + ki * integral + kd * derivative;
+    output = input + kp * error + ki * integral + kd * derivative;
     output = constrain(output, min_output, max_output);
     if (verbose) {
       Serial.print(">encoder_count:"); Serial.println(input);
